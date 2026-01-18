@@ -23,6 +23,7 @@ function findHighestScreenTime(log) {
     }
     return maxDay;
 }
+console.log(findHighestScreenTime(weekData));
 
 function averageSleep(log) {
     let totalSleep = 0;
@@ -32,6 +33,7 @@ function averageSleep(log) {
     let average = totalSleep / log.length;
     return average;
 }
+console.log(averageSleep(weekData));
 
 function mostFrequentMood(log) {
     const moodCounts = {};
@@ -55,3 +57,25 @@ function mostFrequentMood(log) {
     return mostFrequent;
     
 }
+console.log(mostFrequentMood(weekData));
+
+function correlateCaffeineToFocus(log) {
+    let bestFocusDay = log[0];
+    let highestCaffeine = log[0];
+
+    for (let entry of log) {
+        if (entry.focusLevel > bestFocusDay.focusLevel) {
+            bestFocusDay = entry;
+        } 
+        if (entry.caffeineIntake > highestCaffeine.caffeineIntake) {
+            highestCaffeine = entry;
+        }
+    }
+    if (bestFocusDay.caffeineIntake < highestCaffeine.caffeineIntake) {
+        return `More caffeine didn't result in better focus. Best focus was on ${bestFocusDay.day}
+        with focus level ${bestFocusDay.focusLevel} and only ${bestFocusDay.caffeineIntake} cups of coffee.`;
+    } else {
+        return `High caffeine intake on ${highestCaffeine.day}, ${highestCaffeine.caffeineIntake} matched high focus level.`
+    }
+}
+console.log(correlateCaffeineToFocus(weekData));
