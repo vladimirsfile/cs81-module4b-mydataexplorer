@@ -11,3 +11,47 @@ const weekData = [
 // I predict that long sleep will not always result in  better screen time and productivity.
 // I predict that coffee not necessarily help me focus better. 
 // I predict that most days I am chill. 
+
+function findHighestScreenTime(log) {
+    let maxDay = null;
+    let highestScreentime = 0;
+    for (let entry of log) {
+        if (entry.screenTime > highestScreentime) {
+            highestScreentime = entry.screenTime;
+            maxDay = entry.day;
+        }
+    }
+    return maxDay;
+}
+
+function averageSleep(log) {
+    let totalSleep = 0;
+    for (let entry of log) {
+        totalSleep += entry.sleepHours;
+    }
+    let average = totalSleep / log.length;
+    return average;
+}
+
+function mostFrequentMood(log) {
+    const moodCounts = {};
+    
+    for (let entry of log) {
+        if (!moodCounts[entry.mood]) {
+            moodCounts[entry.mood] = 1;
+        } else {
+            moodCounts[entry.mood]++;
+        }
+    }
+    let mostFrequent = null;
+    let highestCount = 0;
+
+    for (let mood in moodCounts) {
+        if (moodCounts[mood] > highestCount) {
+            highestCount = moodCounts[mood];
+            mostFrequent = mood;
+        }
+    }
+    return mostFrequent;
+    
+}
